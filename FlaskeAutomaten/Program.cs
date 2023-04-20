@@ -62,11 +62,11 @@ namespace FlaskeAutomaten
             for (int i = 1; i <= 10; i++)
             {
                 string item = "øl " + i;//Opretter en øl streng
-                Console.WriteLine("Producer pushes " + item);//Fortæller brugeren at producenten har en øl til bufferen
+                Console.WriteLine("Producer pushes " + item);//Fortæller brugeren at producenten har pushet en øl til bufferen
                 this.buffer.Push(item);//Tilføjer øllen til bufferen
 
                 item = "sodavand " + i;//Opretter en sodavand streng
-                Console.WriteLine("Producer pushes " + item);//Fortæller brugeren at producenten har en sodavand til bufferen
+                Console.WriteLine("Producer pushes " + item);//Fortæller brugeren at producenten har pushet en sodavand til bufferen
                 this.buffer.Push(item);//Tilføjer sodavand til bufferen
 
                 Thread.Sleep(1000);

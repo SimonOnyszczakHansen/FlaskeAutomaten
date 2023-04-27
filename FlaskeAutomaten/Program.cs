@@ -61,13 +61,13 @@ namespace FlaskeAutomaten
         {
             for (int i = 1; i <= 10; i++)
             {
-                string item = "øl " + i;//Opretter en øl streng
-                Console.WriteLine("Producer pushes " + item);//Fortæller brugeren at producenten har pushet en øl til bufferen
-                this.buffer.Push(item);//Tilføjer øllen til bufferen
+                string drink= "øl " + i;//Opretter en øl streng
+                Console.WriteLine("Producer pushes " + drink);//Fortæller brugeren at producenten har pushet en øl til bufferen
+                this.buffer.Push(drink);//Tilføjer øllen til bufferen
 
-                item = "sodavand " + i;//Opretter en sodavand streng
-                Console.WriteLine("Producer pushes " + item);//Fortæller brugeren at producenten har pushet en sodavand til bufferen
-                this.buffer.Push(item);//Tilføjer sodavand til bufferen
+                drink = "sodavand " + i;//Opretter en sodavand streng
+                Console.WriteLine("Producer pushes " + drink);//Fortæller brugeren at producenten har pushet en sodavand til bufferen
+                this.buffer.Push(drink);//Tilføjer sodavand til bufferen
 
                 Thread.Sleep(1000);
             }
@@ -91,22 +91,22 @@ namespace FlaskeAutomaten
         {
             while (true)
             {
-                string item = this.inputBuffer.Pull();//Puller et element fra input bufferen
-                if (item == null)//Hvis elementet er null stopper tråden
+                string drink = this.inputBuffer.Pull();//Puller et element fra input bufferen
+                if (string.IsNullOrEmpty(drink))//Hvis elementet er null stopper tråden
                 {
                     break;
                 }
-                Console.WriteLine("Splitter pulls " + item);//Fortæller brugeren at splitteren puller et element
+                Console.WriteLine("Splitter pulls " + drink);//Fortæller brugeren at splitteren puller et element
 
-                if (item.StartsWith("øl"))//Hvis elementet er en øl indsætter den det i outputbuffer 1
+                if (drink.StartsWith("øl"))//Hvis elementet er en øl indsætter den det i outputbuffer 1
                 {
-                    Console.WriteLine("Splitter pushes " + item + " to øl båndet");
-                    this.outputBuffer1.Push(item);
+                    Console.WriteLine("Splitter pushes " + drink + " to øl båndet");
+                    this.outputBuffer1.Push(drink);
                 }
-                else if (item.StartsWith("sodavand"))//Hvis elementet er sodavandvand indsætter den det i outputbuffer 2
+                else if (drink.StartsWith("sodavand"))//Hvis elementet er sodavand indsætter den det i outputbuffer 2
                 {
-                    Console.WriteLine("Splitter pushes " + item + " to sodavands båndet");
-                    this.outputBuffer2.Push(item);
+                    Console.WriteLine("Splitter pushes " + drink + " to sodavands båndet");
+                    this.outputBuffer2.Push(drink);
                 }
             }
         }
@@ -114,12 +114,12 @@ namespace FlaskeAutomaten
 
     class Consumer
     {
-        private string name;//Navn på brugeren
+        private string userName;//Navn på brugeren
         private Buffer buffer;//Bufferen som brugeren skal trække fra
 
-        public Consumer(string name, Buffer buffer)
+        public Consumer(string userName, Buffer buffer)
         {
-            this.name = name;
+            this.userName = userName;
             this.buffer = buffer;
         }
 
@@ -127,12 +127,12 @@ namespace FlaskeAutomaten
         {
             while (true)
             {
-                string item = this.buffer.Pull();//Puller et element fra bufferen
-                if (item == null)//Hvis elementet er null stopper tråden
+                string drink = this.buffer.Pull();//Puller et element fra bufferen
+                if (string.IsNullOrEmpty(drink))//Hvis elementet er null stopper tråden
                 {
                     break;
                 }
-                Console.WriteLine(this.name + " pulls " + item + "");//Udskriver navnet på brugeren og elementet som bliver pullet fra bufferen
+                Console.WriteLine(this.userName + " pulls " + drink + "");//Udskriver navnet på brugeren og elementet som bliver pullet fra bufferen
             }
         }
     }
